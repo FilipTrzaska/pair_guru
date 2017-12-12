@@ -1,0 +1,11 @@
+%h2 This movie has
+    = pluralize(@comments.count, "Comment")
+- @comments.each do |comment|
+    %p
+        %b comment.user.email
+    %p %= comment.content
+    - if current_user == comment.user
+        = link_to "delete comment", [comment.movie, comment], method :delete
+        = link_to "edit comment", edit_movie_comment_path(comment.movie, comment)
+
+= render 'comments/form'
