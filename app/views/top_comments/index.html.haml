@@ -1,0 +1,6 @@
+%h2 Top 10 commenting users in last 7 days:
+- value = Comment.where("created_at - :today < 7", {today: Date.today}).group("user_id").count.sort_by {|_key, value| value}.reverse.take(10)
+%ol{:type => "1"}
+  - for i in 0..9
+    %li
+      = User.find(value.at(i).at(0)).name

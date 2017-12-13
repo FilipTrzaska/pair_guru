@@ -4,7 +4,6 @@ class CommentsController < ApplicationController
     before_action :comment_user, only: [:destroy, :edit, :update]
     before_action :comment_limit, only: [:create]
 
-    
     def create
         @comment = @movie.comment.create(params[:content].permit(:content))
         @comment.user_id = current_user.id
@@ -60,3 +59,5 @@ class CommentsController < ApplicationController
        end
     end
 end
+
+# Comment.where("created_at - :today < 7", {today: Date.today}).group("user_id").count.sort_by {|_key, value| value}.reverse.take(3)
